@@ -1,0 +1,16 @@
+<h1>Author Profile:</h1>
+<h1>{{author}}</h1>
+<p>bio:  {{author.bio}}</p>
+
+<p><strong>other recipes by author:</strong></p>
+<ul>
+
+{% for reciepe in reciepes %}
+    {% if reciepe.author == author %}
+    <li>
+    <a href="/reciepe/{{ reciepe.id }}/">{{reciepe.title}} by {{reciepe.author}}</a>
+    </li>
+    {% endif %}
+{% endfor %}  
+</ul>
+<a href="/">Home</a>  

@@ -1,0 +1,14 @@
+
+
+<div>
+<h1>RECIEPE BOX!</h1>
+<p>available reciepes</p>
+<ul>
+{% for reciepe in reciepes %}
+    <li>
+    <a href="/reciepe/{{ reciepe.id }}/">{{reciepe.title}} by {{reciepe.author}}</a>
+    </li>
+
+{% endfor %}  
+</ul>   
+</div>
