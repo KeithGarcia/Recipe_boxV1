@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect, reverse
+from django.shortcuts import render,HttpResponseRedirect, reverse,HttpResponse
 from recipe_box.models import Reciepe, Author
 from recipe_box.forms import AddRecipeForm, AddAuthorForm, LoginForm, SignupForm
 from django.contrib.auth import login, logout, authenticate
@@ -30,35 +30,45 @@ def add_recipe(request):
     
     if request.method == "POST":
         form = AddRecipeForm(request.POST)
+        
         if form.is_valid():
             data = form.cleaned_data
+            if request.user.is_staff:
+                theauth= data.get('author')
+            else:
+                theauth = request.user.author
+                      
             Reciepe.objects.create(
                 title=data.get('title'),
                   
-                author=request.user.author,
+                author=theauth,
                 description=data.get('description'),
                 time_required=data.get('time_required'),
                 intructions=data.get('intructions')
                 )
             return HttpResponseRedirect(reverse('homepage'))    
-            
+    if request.user.is_staff:
+        the_authors= Author.objects.all()
+    else: 
+        the_authors = ""        
     form = AddRecipeForm()
-    return render(request, "reciepe_form.html", {"form": form})
+    return render(request, "reciepe_form.html", {"form": form,"authors":the_authors})
 
-
-@permission_required("staff")
+@login_required
 def add_author(request):
-    if request.method == "POST":
-        form = AddAuthorForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            new_user = User.objects.create_user(username=data.get("username"),password=data.get("password"))
-            Author.objects.create(name=data.get("name"),bio=data.get("bio"),user=new_user)
-            return HttpResponseRedirect(reverse("homepage"))
+    if request.user.is_staff:
+        if request.method == "POST":
+            form = AddAuthorForm(request.POST)
+            if form.is_valid():
+                data = form.cleaned_data
+                new_user = User.objects.create_user(username=data.get("username"),password=data.get("password"))
+                Author.objects.create(name=data.get("name"),bio=data.get("bio"),user=new_user)
+                return HttpResponseRedirect(reverse("homepage"))
 
-    form = AddAuthorForm()
-    return render(request, "author_form.html", {"form": form})
-
+        form = AddAuthorForm()
+        return render(request, "author_form.html", {"form": form})
+    else:
+        return HttpResponse(content=f"sorry {request.user} you do not have access to this page")
 
 def login_view(request):
     if request.method == "POST":

@@ -1,10 +1,27 @@
-<form action="/addrecipe/" method="post">
+<form action="" method="post">
 
     {% csrf_token %}
-    {% if requst.user.is_staff %}
-        <p>oof</p>
-    {% endif %}
-    {{form.as_p}}
+    <label for="title">Title:</label><br>
+    <p>{{form.title}}</p>
+
+    {% if request.user.is_staff %}
+        <label for=author>Author:</label><br>
+        {{form.author}}
+        <br>
+    {% endif %}    
+    <label for"time_required">Time Required:</label><br>
+        <p>{{form.time_required}}</p>    
+    <label for="description">Description:</label><br>
+        <p>{{form.description}}</p> 
+    <label for="intructions">Instructions:</label><br>
+        <p>{{form.intructions}}</p>          
+        </select></p>
+        
+        
+    
     <input type="submit" value="Submit!">
 </form>
+{% if request.user.is_superuser %}
+    <h2>welcome {{request.user}} </h2>    
+{% endif %}
 <a href ="/">home</a>
