@@ -1,24 +1,21 @@
-
-
 <div>
-<h1>RECIEPE BOX!</h1>
-<h2> am i authenticated? {{request.user.is_authenticated}}
-{% if request.user.is_authenticated %}
-    <h3>Welcome, {{request.user.username}}
-
-{% endif %} 
-<p>available reciepes</p>
-<ul>
-{% for reciepe in reciepes %}
-    <li>
-    <a href="/reciepe/{{ reciepe.id }}/">{{reciepe.title}}</a>
-    </li>
-
-{% endfor %}  
-</ul> 
-<span><a href = "/addrecipe/">Add a new Recipe!</a></span><br>
-<span><a href="/addauthor/">create user/author!(admin required)</a></span><br>
-<span><a href="/signup/">need a user? create a user/author</a><br>
-<span><a href="/login/">already have a user? login!</a></span><br>
-<span><a href="/logout/">logout!</a></span>   
+    <h1>RECIPE BOX!</h1>
+    <h2> am i authenticated? {{request.user.is_authenticated}}
+        {% if request.user.is_authenticated %}
+        <h3>Welcome, {{request.user.username}}
+            {% endif %}
+            <p>available recipes</p>
+            <ul>
+                {% for recipe in recipes %}
+                <li>
+                    <a href="/recipe/{{ recipe.id }}/">{{recipe.title}}</a>
+                    <a href="author/{{ post.author.name }}">{{ post.author.name }}</a> |
+                </li>
+                {% endfor %}
+            </ul>
+            <span><a href="/addrecipe/">Add a new Recipe!</a></span><br>
+            <span><a href="/addauthor/">create user/author!(admin required)</a></span><br>
+            <span><a href="/signup/">need a user? create a user/author</a><br>
+                <span><a href="/login/">already have a user? login!</a></span><br>
+                <span><a href="/logout/">logout!</a></span>
 </div>

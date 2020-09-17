@@ -1,0 +1,10 @@
+Metadata-Version: 1.2
+Name: recipe-box
+Version: 0.1.0
+Summary: will hold different recipes by different authors
+Home-page: UNKNOWN
+Author: Randy Charity Jr
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.8,<4.0

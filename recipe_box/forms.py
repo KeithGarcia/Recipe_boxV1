@@ -1,7 +1,5 @@
 from django import forms
-from recipe_box.models import Reciepe, Author
-
-
+from recipe_box.models import Recipe, Author
 
 class AddRecipeForm(forms.Form):
     title = forms.CharField(max_length=50)
@@ -20,6 +18,7 @@ class AddAuthorForm(forms.Form):
     username = forms.CharField(max_length=240)
     password = forms.CharField(widget=forms.PasswordInput)
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=240)
     password = forms.CharField(widget=forms.PasswordInput) 
@@ -27,4 +26,11 @@ class LoginForm(forms.Form):
 
 class SignupForm(forms.Form):
     username = forms.CharField(max_length=240)
-    password = forms.CharField(widget=forms.PasswordInput)       
+    password = forms.CharField(widget=forms.PasswordInput)
+
+
+class EditForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    description = forms.CharField(widget=forms.Textarea)
+    time_required = forms.CharField(max_length=10)
+    instructions = forms.CharField(widget=forms.Textarea)       

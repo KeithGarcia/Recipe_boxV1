@@ -1,0 +1,22 @@
+<div>
+    {% if not recipe %}
+    <h1> the recipe you are looking for does not exist!</h1>
+    {% else %}
+    <h2>{{recipe.title}}</h2>
+    <h4>Description: {{recipe.description}}</h4>
+    <h4>Author: <a href='/author/{{ recipe.author.name }}'>{{recipe.author.name}}</a></h4>
+    <h4>Time Required: {{ recipe.time_required  }}</h4>
+    <p>{{recipe.intructions}}</p>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+    {% if not isfav %}
+    <a href="/favorite/{{ recipe.id }}">favorite this post</a>
+    {% else %}
+    <p>you've favorited this recipe</p>
+    {% endif %}
+    {% endif %}
+    {% if editbutton %}
+    <a href="/edit/{{ recipe.id }}">Edit Post</a>
+    {% endif %}
+</div>
+<a href="/">Home</a>

@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
 class Author(models.Model):
     name = models.CharField(max_length=80)
     bio = models.TextField()
     user = models.OneToOneField( User, on_delete=models.CASCADE)
+    favorites = models.ManyToManyField("Recipe", symmetrical=False, related_name="favorites", blank=True)
     
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Profile(models.Model):
 
 
 
-class Reciepe(models.Model):
+class Recipe(models.Model):
     title = models.CharField(max_length=50)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     description = models.TextField()

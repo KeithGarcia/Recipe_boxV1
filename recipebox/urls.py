@@ -22,13 +22,15 @@ from recipe_box import views
 
 urlpatterns = [
     path('', views.index, name="homepage"),
-    path('reciepe/<int:reciepe_id>/', views.reciepe_detail),
-    path('author/<str:author_name>/', views.author_detail),
+    path('recipe/<int:recipe_id>/', views.recipe_detail),
+    path('author/<str:author_name>/', views.AuthorView.as_view(), name="author"),
     path('addrecipe/', views.add_recipe),
     path('addauthor/', views.add_author),
     path('login/',views.login_view),
     path('logout/',views.logout_view),
     path('signup/',views.signup_view),
+    path('favorite/<int:post_id>/', views.FavoriteView.as_view(), name="favorite"),
+    path('edit/<int:post_id>/', views.EditView.as_view(), name="edit"),
     path('admin/', admin.site.urls),
 
 ]

@@ -5,23 +5,24 @@
     <p>{{form.title}}</p>
 
     {% if request.user.is_staff %}
-        <label for=author>Author:</label><br>
-        {{form.author}}
-        <br>
-    {% endif %}    
+    <label for=author>Author:</label><br>
+    {{form.author}}
+    <br>
+    {% endif %}
     <label for"time_required">Time Required:</label><br>
-        <p>{{form.time_required}}</p>    
+    <p>{{form.time_required}}</p>
     <label for="description">Description:</label><br>
-        <p>{{form.description}}</p> 
+    <p>{{form.description}}</p>
     <label for="intructions">Instructions:</label><br>
-        <p>{{form.intructions}}</p>          
-        </select></p>
-        
-        
-    
+    <p>{{form.intructions}}</p>
+    </select></p>
+
+    {{ form.as_p }}
+
+    <input type="logout" value="logout">
     <input type="submit" value="Submit!">
 </form>
 {% if request.user.is_superuser %}
-    <h2>welcome {{request.user}} </h2>    
+<h2>welcome {{request.user}} </h2>
 {% endif %}
-<a href ="/">home</a>
+<a href="/">home</a>
